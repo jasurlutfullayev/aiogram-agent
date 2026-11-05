@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aiogram-agent"
+version = "0.2.0"
+description = "Turn an aiogram 3 Telegram bot into an LLM sales/support agent: tools, memory, human handoff."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Jasur Lutfullaev", email = "lutfullayevjasur574@gmail.com" }]
+keywords = ["aiogram", "telegram", "bot", "llm", "agent", "openai", "anthropic", "claude", "tool-calling"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Framework :: AsyncIO",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Communications :: Chat",
+  "Typing :: Typed",
+]
+dependencies = ["aiogram>=3.10,<4"]
+
+[project.optional-dependencies]
+openai = ["openai>=1.40"]
+anthropic = ["anthropic>=0.40"]
+redis = ["redis>=5"]
+postgres = ["asyncpg>=0.29"]
+all = ["openai>=1.40", "anthropic>=0.40", "redis>=5", "asyncpg>=0.29"]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "ruff>=0.5", "fakeredis>=2.20"]
+
+[project.urls]
+Homepage = "https://github.com/jasurlutfullayev/aiogram-agent"
+Issues = "https://github.com/jasurlutfullayev/aiogram-agent/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aiogram_agent"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
